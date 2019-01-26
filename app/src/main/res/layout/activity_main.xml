@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.diaoyonglong.editext.FeedBackEditext
+        android:id="@+id/CustomEditextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:edtColor="@color/colorAccent"
+        app:edtSize="20"
+        app:textColor="#333333"
+        app:textGravity="right"
+        app:textMax="1000"
+        app:textSize="13">
+
+    </com.diaoyonglong.editext.FeedBackEditext>
+</LinearLayout>
