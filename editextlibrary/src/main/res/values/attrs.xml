@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FeedBackEditext">
+        <attr name="bgColor" format="color" />
+        <attr name="edtHint" format="string" />
         <attr name="edtColor" format="color" />
         <attr name="edtSize" format="integer" />
+        <attr name="edtLineSpacing" format="integer" />
+        <attr name="edtPadding" format="integer" />
         <attr name="textColor" format="color" />
         <attr name="textSize" format="integer" />
         <attr name="lineHight" format="integer" />

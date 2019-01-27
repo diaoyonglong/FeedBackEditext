@@ -9,13 +9,15 @@
     <com.diaoyonglong.editext.FeedBackEditext
         android:id="@+id/editext"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:edtColor="@color/colorAccent"
-        app:edtSize="20"
-        app:textColor="#333333"
+        android:layout_height="wrap_content"
+        app:edtColor="@color/color_666666"
+        app:edtLineSpacing="10"
+        app:edtPadding="20"
+        app:edtSize="13"
+        app:textColor="@color/color_666666"
         app:textGravity="right"
         app:textMax="1000"
-        app:textSize="13">
+        app:textSize="11">
 
     </com.diaoyonglong.editext.FeedBackEditext>
 </LinearLayout>
