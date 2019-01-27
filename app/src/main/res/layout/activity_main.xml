@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <com.diaoyonglong.editext.FeedBackEditext
-        android:id="@+id/CustomEditextView"
+        android:id="@+id/editext"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:edtColor="@color/colorAccent"
