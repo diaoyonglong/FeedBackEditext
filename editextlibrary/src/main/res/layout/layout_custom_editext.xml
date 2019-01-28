@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_all"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#F6F6F6"
     android:orientation="vertical">
 
     <EditText
         android:id="@+id/edt_content"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:background="@null"
         android:gravity="left|top"
         android:hint="请你输入想要输入的各种"
@@ -30,7 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
             android:text="0/1000"
             android:textSize="11sp" />
     </LinearLayout>
@@ -40,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="5dp"
-        android:background="@color/color_666666" />
+        android:background="@color/color_666666"
+        android:visibility="gone" />
 
 </LinearLayout>

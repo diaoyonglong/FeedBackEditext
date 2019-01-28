@@ -4,20 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="15dp">
 
     <com.diaoyonglong.editext.FeedBackEditext
         android:id="@+id/editext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:bgColor="#F6F6F6"
+        app:cursorDrawable="@drawable/base_cursor_color"
         app:edtColor="@color/color_666666"
-        app:edtLineSpacing="10"
-        app:edtPadding="20"
+        app:edtHint="为了更好的为您提供服务，欢迎您提出宝贵的意见和 建议，感谢！"
+        app:edtHintColor="#B7B7B7 "
+        app:edtLineSpacing="2"
         app:edtSize="13"
+        app:llPadding="15dp"
         app:textColor="@color/color_666666"
         app:textGravity="right"
+        app:textMarginTop="10dp"
         app:textMax="1000"
         app:textSize="11">
 
     </com.diaoyonglong.editext.FeedBackEditext>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="获取文字" />
+
 </LinearLayout>
