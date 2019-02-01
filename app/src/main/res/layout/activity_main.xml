@@ -10,19 +10,20 @@
         android:id="@+id/editext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:bgColor="#F6F6F6"
-        app:cursorDrawable="@drawable/base_cursor_color"
-        app:edtColor="@color/color_666666"
-        app:edtHint="为了更好的为您提供服务，欢迎您提出宝贵的意见和 建议，感谢！"
-        app:edtHintColor="#B7B7B7 "
-        app:edtLineSpacing="2"
-        app:edtSize="13"
-        app:llPadding="15dp"
-        app:textColor="@color/color_666666"
-        app:textGravity="right"
-        app:textMarginTop="10dp"
-        app:textMax="1000"
-        app:textSize="11">
+        app:bg_color="#F6F6F6"
+        app:edt_color="@color/color_666666"
+        app:edt_cursor_drawable="@drawable/base_cursor_color"
+        app:edt_height="150dp"
+        app:edt_hint="为了更好的为您提供服务，欢迎您提出宝贵的意见和 建议，感谢！"
+        app:edt_hint_color="#B7B7B7 "
+        app:edt_line_spacing="2"
+        app:edt_size="13"
+        app:ll_padding="15dp"
+        app:text_color="@color/color_666666"
+        app:text_gravity="right"
+        app:text_margin_top="10dp"
+        app:text_max="1000"
+        app:text_size="11">
 
     </com.diaoyonglong.editext.FeedBackEditext>
 

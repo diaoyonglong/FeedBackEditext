@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +54,8 @@ public class FeedBackEditext extends LinearLayout {
     private int edtHintColor;
     //EditText 字体颜色
     private int edtColor;
+    //EditText 高度
+    private int edtHeight;
     //EditText 字体大小
     private float edtSize;
     //EditText 行间距
@@ -107,19 +110,20 @@ public class FeedBackEditext extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_editext, this, true);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FeedBackEditext);
 
-        edtHint = typedArray.getString(R.styleable.FeedBackEditext_edtHint);
-        edtHintColor = typedArray.getColor(R.styleable.FeedBackEditext_edtHintColor, defaultBgColor);
-        llBgolor = typedArray.getColor(R.styleable.FeedBackEditext_bgColor, defaultBgColor);
-        edtColor = typedArray.getColor(R.styleable.FeedBackEditext_edtColor, defaultTextColor);
-        edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_edtSize, defaultSize);
-        edtLineSpacing = typedArray.getInteger(R.styleable.FeedBackEditext_edtLineSpacing, 2);
-        llPadding = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_llPadding, 20);
-        edtcursorDrawable = typedArray.getResourceId(R.styleable.FeedBackEditext_cursorDrawable, R.drawable.base_cursor_color);
-        txtColor = typedArray.getColor(R.styleable.FeedBackEditext_textColor, defaultTextColor);
-        txtSize = typedArray.getInteger(R.styleable.FeedBackEditext_textSize, defaultSize);
-        MaxNum = typedArray.getInteger(R.styleable.FeedBackEditext_textMax, MaxNum);
-        txtGravity = typedArray.getInteger(R.styleable.FeedBackEditext_textGravity, defaultTxtGravity);
-        txtMarginTop = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_textMarginTop, 10);
+        llBgolor = typedArray.getColor(R.styleable.FeedBackEditext_bg_color, defaultBgColor);
+        llPadding = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_ll_padding, 20);
+        edtColor = typedArray.getColor(R.styleable.FeedBackEditext_edt_color, defaultTextColor);
+        edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_edt_size, defaultSize);
+        edtHeight = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_edt_height, 150);
+        edtHint = typedArray.getString(R.styleable.FeedBackEditext_edt_hint);
+        edtHintColor = typedArray.getColor(R.styleable.FeedBackEditext_edt_hint_color, defaultBgColor);
+        edtLineSpacing = typedArray.getInteger(R.styleable.FeedBackEditext_edt_line_spacing, 2);
+        edtcursorDrawable = typedArray.getResourceId(R.styleable.FeedBackEditext_edt_cursor_drawable, R.drawable.base_cursor_color);
+        txtColor = typedArray.getColor(R.styleable.FeedBackEditext_text_color, defaultTextColor);
+        txtSize = typedArray.getInteger(R.styleable.FeedBackEditext_text_size, defaultSize);
+        MaxNum = typedArray.getInteger(R.styleable.FeedBackEditext_text_max, MaxNum);
+        txtGravity = typedArray.getInteger(R.styleable.FeedBackEditext_text_gravity, defaultTxtGravity);
+        txtMarginTop = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_text_margin_top, 10);
 
         //回收资源，这一句必须调用
         typedArray.recycle();
@@ -134,13 +138,15 @@ public class FeedBackEditext extends LinearLayout {
         vLine = (View) findViewById(R.id.v_line);
 
         llAll.setBackgroundColor(llBgolor);
+        llAll.setPadding(llPadding, llPadding, llPadding, llPadding);
         edtContent.setTextSize(edtSize);
         edtContent.setTextColor(edtColor);
         edtContent.setHint(edtHint);
         edtContent.setHintTextColor(edtHintColor);
         edtContent.setLineSpacing(edtLineSpacing, 1);
-        llAll.setPadding(llPadding, llPadding, llPadding, llPadding);
-
+        ViewGroup.LayoutParams edtlp = edtContent.getLayoutParams();
+        edtlp.height = edtHeight;
+        edtContent.setLayoutParams(edtlp);
 
         //设置光标颜色、粗细
         try {
