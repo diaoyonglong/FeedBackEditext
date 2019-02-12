@@ -2,7 +2,6 @@ package com.diaoyonglong.editext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -11,10 +10,12 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 
 /**
  * Created by diaoyonglong on 2019/1/26
@@ -29,35 +30,60 @@ public class FeedBackEditext extends LinearLayout {
     public static final String SINGULAR = "Singular";//类型1(单数类型)
     public static final String PERCENTAGE = "Percentage";//类型2(百分比类型)
 
-    private EditText edtContent;//文本框
-    private LinearLayout llTvNum;//字数显示LinearLayout
-    private TextView tvNum;//字数显示TextView
-    private View vLine;//底部横线
+    //主布局
+    private LinearLayout llAll;
+    //文本框
+    private EditText edtContent;
+    //字数显示Layout
+    private LinearLayout llTvNum;
+    //字数显示TextView
+    private TextView tvNum;
+    //底部横线(暂时无用)
+    private View vLine;
 
-    private String TYPES = PERCENTAGE;//类型
-    private int MaxNum = 100;//最大字符
-
-    //声明EdiText属性
-    private String edtTextHint;//
-    private int edtColor;//
-    private float edtSize;//
-    private int tvColor;//
-    private float tvSize;//
-    // 数字位置：LEFT RIGHT CENTER
+    /**
+     * 声明EdiText属性
+     */
+    //整体背景色
+    private int llBgolor;
+    //整体padding
+    private int llPadding;
+    //默认文案
+    private String edtHint;
+    //默认文案 字体颜色
+    private int edtHintColor;
+    //EditText 字体颜色
+    private int edtColor;
+    //EditText 高度
+    private int edtHeight;
+    //EditText 字体大小
+    private float edtSize;
+    //EditText 行间距
+    private int edtLineSpacing;
+    //EditText 光标
+    private int edtcursorDrawable;
+    //计数 字体颜色
+    private int txtColor;
+    //计数 字体大小
+    private float txtSize;
+    //计数位置 left right center
     private int txtGravity = 3;
+    //计数 类型
+    private String TYPES = PERCENTAGE;
+    //计数 最大字符
+    private int MaxNum = 1000;
     /**
      * 默认值
      */
-
     // 字体大小
     private int defaultSize = 15;
     // 字体颜色
-    private int defaultTextColor = Color.BLACK;
+    private int defaultTextColor = getResources().getColor(R.color.color_666666);
     // 背景颜色
-    private int defaultBgColor = Color.GRAY;
-    // text默认显示位置 1左2居中3右边
+    private int defaultBgColor = getResources().getColor(R.color.color_F6F6F6);
+    // /计数 text默认显示位置 1左 2中 3右
     private int defaultTxtGravity = 3;
-    // text距离顶部距离margin
+    // /计数 text距离顶部距离margin
     private int txtMarginTop;
 
     public FeedBackEditext(Context context) {
@@ -66,48 +92,75 @@ public class FeedBackEditext extends LinearLayout {
 
     public FeedBackEditext(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        //初始化
+        initView(context, attrs);
         //填充初始数据
-        initData(context, attrs);
-        //初始化按钮的点击事件，并在点击事件中调用用户传入的接口
-        initbtnClick();
+        initData();
     }
 
     public FeedBackEditext(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        //初始化
+        initView(context, attrs);
         //填充初始数据
-        initData(context, attrs);
-        //初始化按钮的点击事件，并在点击事件中调用用户传入的接口
-        initbtnClick();
+        initData();
     }
 
-    private void initData(Context context, AttributeSet attrs) {
+    private void initView(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_editext, this, true);
-
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FeedBackEditext);
-        edtColor = typedArray.getColor(R.styleable.FeedBackEditext_edtColor, defaultTextColor);
-        edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_edtSize, defaultSize);
-        tvColor = typedArray.getColor(R.styleable.FeedBackEditext_textColor, defaultTextColor);
-        tvSize = typedArray.getInteger(R.styleable.FeedBackEditext_textSize, defaultSize);
-        MaxNum = typedArray.getInteger(R.styleable.FeedBackEditext_textMax, 100);
-        txtGravity = typedArray.getInteger(R.styleable.FeedBackEditext_textGravity, 1);
-        txtMarginTop = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_textMarginTop, 50);
+
+        llBgolor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_bg_color, defaultBgColor);
+        llPadding = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_ll_padding, 20);
+        edtColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_edt_color, defaultTextColor);
+        edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_edt_size, defaultSize);
+        edtHeight = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_edt_height, 150);
+        edtHint = typedArray.getString(R.styleable.FeedBackEditext_feedback_edt_hint);
+        edtHintColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_edt_hint_color, defaultBgColor);
+        edtLineSpacing = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_edt_line_spacing, 2);
+        edtcursorDrawable = typedArray.getResourceId(R.styleable.FeedBackEditext_feedback_edt_cursor_drawable, R.drawable.base_cursor_color);
+        txtColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_text_color, defaultTextColor);
+        txtSize = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_text_size, defaultSize);
+        MaxNum = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_text_max, MaxNum);
+        txtGravity = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_text_gravity, defaultTxtGravity);
+        txtMarginTop = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_text_margin_top, 10);
 
         //回收资源，这一句必须调用
         typedArray.recycle();
 
     }
 
-    private void initbtnClick() {
+    private void initData() {
+        llAll = (LinearLayout) findViewById(R.id.ll_all);
         edtContent = (EditText) findViewById(R.id.edt_content);
         llTvNum = (LinearLayout) findViewById(R.id.layout_txt_num);
         tvNum = (TextView) findViewById(R.id.tv_num);
-
         vLine = (View) findViewById(R.id.v_line);
+
+        llAll.setBackgroundColor(llBgolor);
+        llAll.setPadding(llPadding, llPadding, llPadding, llPadding);
         edtContent.setTextSize(edtSize);
         edtContent.setTextColor(edtColor);
-        tvNum.setTextSize(tvSize);
-        tvNum.setTextColor(tvColor);
+        edtContent.setHint(edtHint);
+        edtContent.setHintTextColor(edtHintColor);
+        edtContent.setLineSpacing(edtLineSpacing, 1);
+        ViewGroup.LayoutParams edtlp = edtContent.getLayoutParams();
+        edtlp.height = edtHeight;
+        edtContent.setLayoutParams(edtlp);
 
+        //设置光标颜色、粗细
+        try {
+            Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+            f.setAccessible(true);
+            f.set(edtContent, edtcursorDrawable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tvNum.setTextSize(txtSize);
+        tvNum.setTextColor(txtColor);
+
+        //计数类型
         if (TYPES.equals(SINGULAR)) {//类型1
             tvNum.setText(String.valueOf(MaxNum));
         } else if (TYPES.equals(PERCENTAGE)) {//类型2
@@ -131,9 +184,13 @@ public class FeedBackEditext extends LinearLayout {
                 params.gravity = Gravity.RIGHT;
                 break;
         }
+        params.topMargin = txtMarginTop;
         llTvNum.setLayoutParams(params);
     }
 
+    /**
+     * Editext 监听
+     */
     private TextWatcher mTextWatcher = new TextWatcher() {
         private int editStart;
         private int editEnd;
@@ -198,5 +255,14 @@ public class FeedBackEditext extends LinearLayout {
             }
         }
         return Math.round(len);
+    }
+
+    /**
+     * 获取 输入框内容
+     *
+     * @return
+     */
+    public String getContent() {
+        return edtContent.getText().toString().trim();
     }
 }

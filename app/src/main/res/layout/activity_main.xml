@@ -4,18 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="15dp">
 
     <com.diaoyonglong.editext.FeedBackEditext
-        android:id="@+id/CustomEditextView"
+        android:id="@+id/editext"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:edtColor="@color/colorAccent"
-        app:edtSize="20"
-        app:textColor="#333333"
-        app:textGravity="right"
-        app:textMax="1000"
-        app:textSize="13">
+        android:layout_height="wrap_content"
+        app:feedback_bg_color="#F6F6F6"
+        app:feedback_edt_color="@color/color_666666"
+        app:feedback_edt_cursor_drawable="@drawable/base_cursor_color"
+        app:feedback_edt_height="150dp"
+        app:feedback_edt_hint="为了更好的为您提供服务，欢迎您提出宝贵的意见和建议，感谢！"
+        app:feedback_edt_hint_color="#B7B7B7 "
+        app:feedback_edt_line_spacing="2"
+        app:feedback_edt_size="13"
+        app:feedback_ll_padding="15dp"
+        app:feedback_text_color="@color/color_666666"
+        app:feedback_text_gravity="right"
+        app:feedback_text_margin_top="10dp"
+        app:feedback_text_max="1000"
+        app:feedback_text_size="11">
 
     </com.diaoyonglong.editext.FeedBackEditext>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="获取文字" />
+
 </LinearLayout>
