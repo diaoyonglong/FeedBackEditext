@@ -265,4 +265,13 @@ public class FeedBackEditext extends LinearLayout {
     public String getContent() {
         return edtContent.getText().toString().trim();
     }
+
+    /**
+     * 设置 输入框内容
+     *
+     * @param content
+     */
+    public void setContent(String content) {
+        edtContent.setText(content);
+    }
 }
