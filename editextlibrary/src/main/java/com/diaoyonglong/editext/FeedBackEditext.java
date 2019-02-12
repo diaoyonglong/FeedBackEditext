@@ -110,20 +110,20 @@ public class FeedBackEditext extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_editext, this, true);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FeedBackEditext);
 
-        llBgolor = typedArray.getColor(R.styleable.FeedBackEditext_bg_color, defaultBgColor);
-        llPadding = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_ll_padding, 20);
-        edtColor = typedArray.getColor(R.styleable.FeedBackEditext_edt_color, defaultTextColor);
-        edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_edt_size, defaultSize);
-        edtHeight = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_edt_height, 150);
-        edtHint = typedArray.getString(R.styleable.FeedBackEditext_edt_hint);
-        edtHintColor = typedArray.getColor(R.styleable.FeedBackEditext_edt_hint_color, defaultBgColor);
-        edtLineSpacing = typedArray.getInteger(R.styleable.FeedBackEditext_edt_line_spacing, 2);
-        edtcursorDrawable = typedArray.getResourceId(R.styleable.FeedBackEditext_edt_cursor_drawable, R.drawable.base_cursor_color);
-        txtColor = typedArray.getColor(R.styleable.FeedBackEditext_text_color, defaultTextColor);
-        txtSize = typedArray.getInteger(R.styleable.FeedBackEditext_text_size, defaultSize);
-        MaxNum = typedArray.getInteger(R.styleable.FeedBackEditext_text_max, MaxNum);
-        txtGravity = typedArray.getInteger(R.styleable.FeedBackEditext_text_gravity, defaultTxtGravity);
-        txtMarginTop = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_text_margin_top, 10);
+        llBgolor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_bg_color, defaultBgColor);
+        llPadding = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_ll_padding, 20);
+        edtColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_edt_color, defaultTextColor);
+        edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_edt_size, defaultSize);
+        edtHeight = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_edt_height, 150);
+        edtHint = typedArray.getString(R.styleable.FeedBackEditext_feedback_edt_hint);
+        edtHintColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_edt_hint_color, defaultBgColor);
+        edtLineSpacing = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_edt_line_spacing, 2);
+        edtcursorDrawable = typedArray.getResourceId(R.styleable.FeedBackEditext_feedback_edt_cursor_drawable, R.drawable.base_cursor_color);
+        txtColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_text_color, defaultTextColor);
+        txtSize = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_text_size, defaultSize);
+        MaxNum = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_text_max, MaxNum);
+        txtGravity = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_text_gravity, defaultTxtGravity);
+        txtMarginTop = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_text_margin_top, 10);
 
         //回收资源，这一句必须调用
         typedArray.recycle();
