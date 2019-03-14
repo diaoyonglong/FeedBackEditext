@@ -292,6 +292,15 @@ public class FeedBackEditext extends LinearLayout {
     }
 
     /**
+     * 设置 输入框内容
+     *
+     * @param content
+     */
+    public void setContent(String content) {
+        edtContent.setText(content);
+    }
+
+    /**
      * 输入监听（供外面用）
      */
     public OnTextChangeListener mOnTextChangeListener;
