@@ -26,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
         editext = (FeedBackEditext) findViewById(R.id.editext);
         button = (Button) findViewById(R.id.button);
-
+        editext.setOnTextChangeListener(new FeedBackEditext.OnTextChangeListener() {
+            @Override
+            public void onTextChange(CharSequence s) {
+                Toast.makeText(MainActivity.this, s.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

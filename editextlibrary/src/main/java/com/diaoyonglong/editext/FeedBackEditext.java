@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by diaoyonglong on 2019/1/26
@@ -147,7 +150,6 @@ public class FeedBackEditext extends LinearLayout {
         ViewGroup.LayoutParams edtlp = edtContent.getLayoutParams();
         edtlp.height = edtHeight;
         edtContent.setLayoutParams(edtlp);
-
         //设置光标颜色、粗细
         try {
             Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
@@ -167,7 +169,7 @@ public class FeedBackEditext extends LinearLayout {
             tvNum.setText(0 + "/" + MaxNum);
         }
         //设置长度
-        edtContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(MaxNum)});
+        edtContent.setFilters(new InputFilter[]{emojiFilter, new InputFilter.LengthFilter(MaxNum)});
         //监听输入
         edtContent.addTextChangedListener(mTextWatcher);
 
@@ -216,6 +218,29 @@ public class FeedBackEditext extends LinearLayout {
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (mOnTextChangeListener != null) {
+                mOnTextChangeListener.onTextChange(s);
+            }
+        }
+    };
+
+    /**
+     * 不能输入表情和特殊符号
+     */
+    private static InputFilter emojiFilter = new InputFilter() {
+        Pattern emoji = Pattern.compile(
+                "[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]|[^a-zA-Z0-9\\u4E00-\\u9FA5_,，.。？?!！：;“”'\"()（） ]",
+                Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest,
+                                   int dstart,
+                                   int dend) {
+            Matcher emojiMatcher = emoji.matcher(source);
+            if (emojiMatcher.find()) {
+                return "";
+            }
+            return null;
         }
     };
 
@@ -264,5 +289,18 @@ public class FeedBackEditext extends LinearLayout {
      */
     public String getContent() {
         return edtContent.getText().toString().trim();
+    }
+
+    /**
+     * 输入监听（供外面用）
+     */
+    public OnTextChangeListener mOnTextChangeListener;
+
+    public interface OnTextChangeListener {
+        void onTextChange(CharSequence s);
+    }
+
+    public void setOnTextChangeListener(OnTextChangeListener listener) {
+        this.mOnTextChangeListener = listener;
     }
 }
