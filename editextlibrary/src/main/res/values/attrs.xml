@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FeedBackEditext">
-        <attr name="feedback_bg_color" format="color" />
+        <attr name="feedback_bg_color" format="reference" />
         <attr name="feedback_ll_padding" format="dimension" />
         <attr name="feedback_edt_hint" format="string" />
         <attr name="feedback_edt_hint_color" format="color" />

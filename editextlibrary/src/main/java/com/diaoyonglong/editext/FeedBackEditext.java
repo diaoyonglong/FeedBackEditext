@@ -113,7 +113,7 @@ public class FeedBackEditext extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_editext, this, true);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FeedBackEditext);
 
-        llBgolor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_bg_color, defaultBgColor);
+        llBgolor = typedArray.getResourceId(R.styleable.FeedBackEditext_feedback_bg_color, defaultBgColor);
         llPadding = typedArray.getDimensionPixelSize(R.styleable.FeedBackEditext_feedback_ll_padding, 20);
         edtColor = typedArray.getColor(R.styleable.FeedBackEditext_feedback_edt_color, defaultTextColor);
         edtSize = typedArray.getInteger(R.styleable.FeedBackEditext_feedback_edt_size, defaultSize);
@@ -140,7 +140,7 @@ public class FeedBackEditext extends LinearLayout {
         tvNum = (TextView) findViewById(R.id.tv_num);
         vLine = (View) findViewById(R.id.v_line);
 
-        llAll.setBackgroundColor(llBgolor);
+        llAll.setBackgroundResource(llBgolor);
         llAll.setPadding(llPadding, llPadding, llPadding, llPadding);
         edtContent.setTextSize(edtSize);
         edtContent.setTextColor(edtColor);
